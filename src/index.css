@@ -4,89 +4,79 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 30 8% 97%;
+    --foreground: 20 10% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 10% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 20 10% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 20 10% 8%;
+    --primary-foreground: 30 8% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 30 8% 93%;
+    --secondary-foreground: 20 10% 8%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 30 6% 90%;
+    --muted-foreground: 20 6% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 38 60% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 10% 88%;
+    --input: 30 10% 88%;
+    --ring: 38 60% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0px;
 
-    --sidebar-background: 0 0% 98%;
+    --gold: 38 60% 50%;
+    --gold-light: 38 50% 70%;
+    --dark: 20 10% 8%;
+    --stone: 30 6% 55%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 20 10% 8%;
+    --sidebar-foreground: 30 8% 97%;
+    --sidebar-primary: 38 60% 50%;
+    --sidebar-primary-foreground: 20 10% 8%;
+    --sidebar-accent: 20 8% 14%;
+    --sidebar-accent-foreground: 30 8% 97%;
+    --sidebar-border: 20 8% 18%;
+    --sidebar-ring: 38 60% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 20 10% 6%;
+    --foreground: 30 8% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 20 10% 9%;
+    --card-foreground: 30 8% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 20 10% 9%;
+    --popover-foreground: 30 8% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 30 8% 95%;
+    --primary-foreground: 20 10% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 20 8% 14%;
+    --secondary-foreground: 30 8% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 20 8% 14%;
+    --muted-foreground: 30 6% 55%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 38 60% 50%;
+    --accent-foreground: 20 10% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 30 8% 95%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 20 8% 16%;
+    --input: 20 8% 16%;
+    --ring: 38 60% 50%;
   }
 }
 
@@ -97,5 +87,257 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Cormorant", serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Cormorant", serif;
+  }
+
+  .font-body {
+    font-family: "IBM Plex Sans", sans-serif;
+  }
+
+  .text-gold {
+    color: hsl(var(--gold));
+  }
+
+  .bg-gold {
+    background-color: hsl(var(--gold));
+  }
+
+  .border-gold {
+    border-color: hsl(var(--gold));
+  }
+
+  .gold-line::after {
+    content: "";
+    display: block;
+    width: 3rem;
+    height: 1px;
+    background-color: hsl(var(--gold));
+    margin-top: 1rem;
+  }
+
+  .hover-lift {
+    transition:
+      transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      box-shadow 0.4s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+
+  .img-zoom {
+    overflow: hidden;
+  }
+
+  .img-zoom img {
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .img-zoom:hover img {
+    transform: scale(1.05);
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease both;
+  }
+
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+  .delay-600 {
+    animation-delay: 0.6s;
+  }
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  .nav-link {
+    position: relative;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: hsl(var(--gold));
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .section-label {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: hsl(var(--gold));
+    font-weight: 400;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: hsl(var(--dark));
+    color: hsl(var(--background));
+    padding: 0.875rem 2rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    border: 1px solid hsl(var(--dark));
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: hsl(var(--gold));
+    border-color: hsl(var(--gold));
+    color: white;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: transparent;
+    color: hsl(var(--dark));
+    padding: 0.875rem 2rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    border: 1px solid hsl(var(--dark));
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background-color: hsl(var(--dark));
+    color: hsl(var(--background));
+  }
+
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    border: 1px solid hsl(var(--border));
+    transition: all 0.25s ease;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .filter-chip:hover,
+  .filter-chip.active {
+    background-color: hsl(var(--dark));
+    color: hsl(var(--background));
+    border-color: hsl(var(--dark));
+  }
+
+  .map-pin {
+    width: 10px;
+    height: 10px;
+    background-color: hsl(var(--gold));
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px hsl(var(--gold));
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  .map-pin:hover {
+    transform: scale(1.5);
+  }
+
+  .calc-input {
+    border: none;
+    border-bottom: 1px solid hsl(var(--border));
+    background: transparent;
+    padding: 0.5rem 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease;
+    color: hsl(var(--foreground));
+  }
+
+  .calc-input:focus {
+    border-color: hsl(var(--gold));
+  }
+
+  .slide-counter {
+    font-family: "Cormorant", serif;
+    font-size: 1.5rem;
+    color: hsl(var(--gold));
   }
 }
