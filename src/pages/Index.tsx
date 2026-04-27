@@ -96,7 +96,7 @@ export default function Index() {
             <p className="section-label text-[hsl(38,60%,70%)] mb-4 animate-fade-up">Архитектурное бюро</p>
             <h1 className="font-display text-6xl md:text-8xl font-light text-white leading-none mb-6 animate-fade-up delay-100">
               Создаём<br />
-              <span className="italic font-normal" style={{ color: "hsl(38,75%,72%)", textShadow: "0 0 40px hsla(38,80%,55%,0.4)" }}>пространства</span><br />
+              <span className="italic font-normal" style={{ color: "transparent", WebkitTextStroke: "2px white", textShadow: "0 2px 40px rgba(255,255,255,0.3)" }}>пространства</span><br />
               для жизни
             </h1>
             <p className="font-body text-white/85 text-sm leading-relaxed max-w-md mb-10 animate-fade-up delay-200">
