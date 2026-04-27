@@ -22,9 +22,9 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/96 backdrop-blur-sm border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-display text-xl font-medium tracking-widest uppercase text-foreground">
+        <Link to="/" className="font-display text-xl font-semibold tracking-widest uppercase text-foreground">
           АРКА
         </Link>
 
@@ -34,7 +34,7 @@ export default function Navbar() {
               <a
                 key={item.href}
                 href={item.href}
-                className={`nav-link text-foreground/70 hover:text-foreground`}
+                className={`nav-link text-foreground hover:text-foreground`}
               >
                 {item.label}
               </a>
@@ -42,7 +42,7 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`nav-link ${isActive(item.href) ? "active text-foreground" : "text-foreground/70 hover:text-foreground"}`}
+                className={`nav-link ${isActive(item.href) ? "active text-foreground" : "text-foreground hover:text-foreground"}`}
               >
                 {item.label}
               </Link>

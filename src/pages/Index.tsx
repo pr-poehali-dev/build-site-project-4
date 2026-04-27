@@ -96,18 +96,18 @@ export default function Index() {
             <p className="section-label text-[hsl(38,60%,70%)] mb-4 animate-fade-up">Архитектурное бюро</p>
             <h1 className="font-display text-6xl md:text-8xl font-light text-white leading-none mb-6 animate-fade-up delay-100">
               Создаём<br />
-              <span className="italic text-[hsl(38,60%,65%)]">пространства</span><br />
+              <span className="italic font-normal" style={{ color: "hsl(38,75%,72%)", textShadow: "0 0 40px hsla(38,80%,55%,0.4)" }}>пространства</span><br />
               для жизни
             </h1>
-            <p className="font-body text-white/70 text-sm leading-relaxed max-w-md mb-10 animate-fade-up delay-200">
+            <p className="font-body text-white/85 text-sm leading-relaxed max-w-md mb-10 animate-fade-up delay-200">
               Более 15 лет мы проектируем и строим объекты, которые становятся частью городской среды. Частные дома, жилые комплексы, коммерческая недвижимость.
             </p>
             <div className="flex gap-4 animate-fade-up delay-300">
-              <Link to="/projects" className="btn-primary bg-white text-foreground border-white hover:bg-gold hover:border-gold">
+              <Link to="/projects" className="btn-primary bg-white text-foreground border-white hover:bg-[hsl(38,60%,50%)] hover:border-[hsl(38,60%,50%)] hover:text-white">
                 Смотреть проекты
                 <Icon name="ArrowRight" size={14} />
               </Link>
-              <button onClick={() => scrollTo("contacts")} className="btn-outline border-white text-white hover:bg-white hover:text-foreground">
+              <button onClick={() => scrollTo("contacts")} className="btn-primary bg-transparent border-2 border-white text-white hover:bg-white hover:text-foreground">
                 Консультация
               </button>
             </div>
