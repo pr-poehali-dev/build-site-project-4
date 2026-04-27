@@ -1,28 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import Navbar from "@/components/Layout/Navbar";
 
 const IMG1 = "https://cdn.poehali.dev/projects/3992aec9-f015-477c-8de1-d9314a23b644/files/b958361d-739d-469e-a932-f1e3a1809d8d.jpg";
 const IMG2 = "https://cdn.poehali.dev/projects/3992aec9-f015-477c-8de1-d9314a23b644/files/02fc9ad1-0d83-4965-a69f-07f5faa80de1.jpg";
 const IMG3 = "https://cdn.poehali.dev/projects/3992aec9-f015-477c-8de1-d9314a23b644/files/ba07babe-cd5c-4c85-bd91-bec6d937429c.jpg";
 
-const NAV_ITEMS = [
-  { id: "home", label: "Главная" },
-  { id: "projects", label: "Проекты" },
-  { id: "portfolio", label: "Портфолио" },
-  { id: "design", label: "Проектирование" },
-  { id: "about", label: "О компании" },
-  { id: "contacts", label: "Контакты" },
-  { id: "blog", label: "Блог" },
-];
 
-const PROJECTS = [
-  { id: 1, title: "Резиденция «Берёзовый лес»", type: "Частный дом", area: 420, price: 85000000, material: "Дерево", location: "Подмосковье", img: IMG1, year: 2024 },
-  { id: 2, title: "Бизнес-центр «Северный»", type: "Коммерческое", area: 8500, price: 950000000, material: "Стекло", location: "Москва", img: IMG2, year: 2023 },
-  { id: 3, title: "Вилла «Горизонт»", type: "Частный дом", area: 680, price: 140000000, material: "Камень", location: "Сочи", img: IMG3, year: 2024 },
-  { id: 4, title: "Жилой квартал «Рассвет»", type: "Жилой комплекс", area: 22000, price: 2400000000, material: "Бетон", location: "Москва", img: IMG1, year: 2023 },
-  { id: 5, title: "Загородный клуб «Тишина»", type: "Коммерческое", area: 1200, price: 180000000, material: "Дерево", location: "Подмосковье", img: IMG3, year: 2022 },
-  { id: 6, title: "Таунхаусы «Сосновый бор»", type: "Жилой комплекс", area: 4200, price: 620000000, material: "Камень", location: "Подмосковье", img: IMG2, year: 2022 },
-];
 
 const BLOG_POSTS = [
   { id: 1, date: "18 апреля 2025", tag: "Тренды", title: "Биофильный дизайн: природа как архитектурный элемент", excerpt: "Как интеграция живой природы в архитектуру меняет восприятие пространства и влияет на качество жизни." },
@@ -46,16 +31,9 @@ const SERVICES = [
   { icon: "Building2", title: "Авторский надзор", desc: "Сопровождение строительства, контроль соответствия проекту на всех этапах" },
 ];
 
-function formatPrice(n: number) {
-  if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)} млрд ₽`;
-  if (n >= 1_000_000) return `${Math.round(n / 1_000_000)} млн ₽`;
-  return `${n.toLocaleString("ru")} ₽`;
-}
 
 export default function Index() {
   const [activeSection, setActiveSection] = useState("home");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeFilters, setActiveFilters] = useState<Record<string, string>>({});
   const [slideIndex, setSlideIndex] = useState(0);
   const [zoomImg, setZoomImg] = useState<string | null>(null);
   const [hoveredPin, setHoveredPin] = useState<number | null>(null);
@@ -74,7 +52,6 @@ export default function Index() {
 
   function scrollTo(id: string) {
     setActiveSection(id);
-    setMenuOpen(false);
     const el = sectionRefs[id]?.current;
     if (el) el.scrollIntoView({ behavior: "smooth" });
   }
@@ -92,16 +69,8 @@ export default function Index() {
       if (r.current) observer.observe(r.current);
     });
     return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const filteredProjects = PROJECTS.filter((p) => {
-    if (activeFilters.type && p.type !== activeFilters.type) return false;
-    if (activeFilters.material && p.material !== activeFilters.material) return false;
-    if (activeFilters.area === "<500" && p.area >= 500) return false;
-    if (activeFilters.area === "500-5000" && (p.area < 500 || p.area > 5000)) return false;
-    if (activeFilters.area === ">5000" && p.area <= 5000) return false;
-    return true;
-  });
 
   const slides = [IMG1, IMG2, IMG3];
 
@@ -114,42 +83,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <button onClick={() => scrollTo("home")} className="font-display text-xl font-medium tracking-widest uppercase text-foreground">
-            АРКА
-          </button>
-          <nav className="hidden lg:flex items-center gap-8">
-            {NAV_ITEMS.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className={`nav-link text-foreground/70 hover:text-foreground ${activeSection === item.id ? "active text-foreground" : ""}`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </nav>
-          <div className="hidden lg:flex">
-            <button onClick={() => scrollTo("contacts")} className="btn-primary text-xs py-2 px-5">
-              Получить консультацию
-            </button>
-          </div>
-          <button className="lg:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-            <Icon name={menuOpen ? "X" : "Menu"} size={20} />
-          </button>
-        </div>
-        {menuOpen && (
-          <div className="lg:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-4 animate-fade-in">
-            {NAV_ITEMS.map((item) => (
-              <button key={item.id} onClick={() => scrollTo(item.id)} className="text-left nav-link text-sm py-1">
-                {item.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </header>
+      <Navbar />
 
       {/* HERO */}
       <section id="home" ref={sectionRefs.home as React.RefObject<HTMLDivElement>} className="relative min-h-screen flex items-end overflow-hidden">
@@ -169,10 +103,10 @@ export default function Index() {
               Более 15 лет мы проектируем и строим объекты, которые становятся частью городской среды. Частные дома, жилые комплексы, коммерческая недвижимость.
             </p>
             <div className="flex gap-4 animate-fade-up delay-300">
-              <button onClick={() => scrollTo("projects")} className="btn-primary bg-white text-foreground border-white hover:bg-gold hover:border-gold">
+              <Link to="/projects" className="btn-primary bg-white text-foreground border-white hover:bg-gold hover:border-gold">
                 Смотреть проекты
                 <Icon name="ArrowRight" size={14} />
-              </button>
+              </Link>
               <button onClick={() => scrollTo("contacts")} className="btn-outline border-white text-white hover:bg-white hover:text-foreground">
                 Консультация
               </button>
@@ -203,90 +137,39 @@ export default function Index() {
         </button>
       </section>
 
-      {/* PROJECTS */}
+      {/* PROJECTS PREVIEW */}
       <section id="projects" ref={sectionRefs.projects as React.RefObject<HTMLDivElement>} className="py-24 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <p className="section-label mb-3">Наши работы</p>
-            <h2 className="font-display text-5xl font-light">Проекты</h2>
+            <h2 className="font-display text-5xl font-light">Проекты домов</h2>
           </div>
+          <Link to="/projects" className="btn-outline flex-shrink-0">
+            Все проекты
+            <Icon name="ArrowRight" size={14} />
+          </Link>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-8 mb-10 pb-6 border-b border-border">
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-muted-foreground uppercase tracking-widest font-body mr-2">Тип:</span>
-            {["Частный дом", "Жилой комплекс", "Коммерческое"].map((t) => (
-              <button
-                key={t}
-                onClick={() => setActiveFilters((f) => ({ ...f, type: f.type === t ? "" : t }))}
-                className={`filter-chip ${activeFilters.type === t ? "active" : ""}`}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-muted-foreground uppercase tracking-widest font-body mr-2">Площадь:</span>
-            {[{ key: "<500", label: "до 500 м²" }, { key: "500-5000", label: "500–5000 м²" }, { key: ">5000", label: "от 5000 м²" }].map((a) => (
-              <button
-                key={a.key}
-                onClick={() => setActiveFilters((f) => ({ ...f, area: f.area === a.key ? "" : a.key }))}
-                className={`filter-chip ${activeFilters.area === a.key ? "active" : ""}`}
-              >
-                {a.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-muted-foreground uppercase tracking-widest font-body mr-2">Материал:</span>
-            {["Дерево", "Камень", "Стекло", "Бетон"].map((m) => (
-              <button
-                key={m}
-                onClick={() => setActiveFilters((f) => ({ ...f, material: f.material === m ? "" : m }))}
-                className={`filter-chip ${activeFilters.material === m ? "active" : ""}`}
-              >
-                {m}
-              </button>
-            ))}
-          </div>
-          {Object.values(activeFilters).some(Boolean) && (
-            <button
-              onClick={() => setActiveFilters({})}
-              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors uppercase tracking-widest font-body"
-            >
-              <Icon name="X" size={12} />
-              Сбросить
-            </button>
-          )}
-        </div>
-
-        {/* Project grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((p, i) => (
-            <div key={p.id} className={`hover-lift animate-fade-up delay-${(i % 4) * 100}`}>
-              <div className="img-zoom aspect-[4/3] overflow-hidden bg-muted mb-4 cursor-pointer" onClick={() => setZoomImg(p.img)}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: "Эверест 148", type: "Дом из газобетона", area: 148, price: "от 4,2 млн ₽", img: IMG1, slug: "everest-148" },
+            { title: "Орион 195", type: "Дом из кирпича", area: 195, price: "от 6,8 млн ₽", img: IMG2, slug: "orion-195" },
+            { title: "Кедр 112", type: "Дом из бруса", area: 112, price: "от 3,15 млн ₽", img: IMG3, slug: "cedar-112" },
+            { title: "Атлас 240", type: "Дом из керамоблока", area: 240, price: "от 9,5 млн ₽", img: IMG1, slug: "atlas-240" },
+          ].map((p, i) => (
+            <Link key={p.slug} to={`/projects/${p.slug}`} className={`group hover-lift block animate-fade-up delay-${i * 100}`}>
+              <div className="img-zoom aspect-[3/4] overflow-hidden bg-muted mb-3">
                 <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
               </div>
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="section-label mb-1">{p.type} · {p.year}</p>
-                  <h3 className="font-display text-xl font-medium mb-2">{p.title}</h3>
-                  <p className="text-xs text-muted-foreground font-body">
-                    {p.area.toLocaleString("ru")} м² · {p.material} · {p.location}
-                  </p>
-                </div>
-                <span className="text-sm font-body text-foreground/60 whitespace-nowrap ml-4 mt-1">{formatPrice(p.price)}</span>
+              <p className="section-label mb-1">{p.type}</p>
+              <h3 className="font-display text-lg font-medium mb-1 group-hover:text-[hsl(38,60%,45%)] transition-colors">{p.title}</h3>
+              <div className="flex justify-between items-center text-sm font-body text-muted-foreground">
+                <span>{p.area} м²</span>
+                <span className="font-display text-base text-foreground">{p.price}</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-20 text-muted-foreground font-body">
-            По выбранным фильтрам проектов не найдено
-          </div>
-        )}
       </section>
 
       {/* PORTFOLIO SLIDER */}
